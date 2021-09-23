@@ -11,7 +11,7 @@ class ViewModelFactory : ViewModelProvider.Factory {
         @Suppress("UNCHECKED_CAST")
         return when {
             modelClass.isAssignableFrom(MainViewModel::class.java) -> MainViewModel(useCase = Injection.provideUseCase()) as T
-            else -> throw Exception(message = "ViewModelFactory Exception")
+            else -> throw Exception("ViewModelFactory Exception")
         }
     }
 }

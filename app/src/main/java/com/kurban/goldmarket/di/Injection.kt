@@ -15,4 +15,8 @@ object Injection {
         val repository = RepositoryImp(client = client)
         return UseCase(repository = repository)
     }
+
+    fun provideViewModelFactory(): ViewModelFactory {
+        return ViewModelFactory()
+    }
 }
