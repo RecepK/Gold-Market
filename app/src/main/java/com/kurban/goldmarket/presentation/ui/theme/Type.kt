@@ -1,4 +1,4 @@
-package com.kurban.goldmarket.ui.theme
+package com.kurban.goldmarket.presentation.ui.theme
 
 import androidx.compose.material.Typography
 import androidx.compose.ui.text.TextStyle
