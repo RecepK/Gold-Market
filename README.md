@@ -1,21 +1,5 @@
 # This is a sample MVVM application.
 
-
-## Architecture MVVM
-
-| Data |
---------
-
-| Domain |
-----------
-
-| Presentation |
-----------------
-
-
-
-
-
 ## Features
 - Kotlin
 - Jetpack Compose
