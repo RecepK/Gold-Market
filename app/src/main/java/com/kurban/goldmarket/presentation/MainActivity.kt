@@ -1,6 +1,7 @@
 package com.kurban.goldmarket.presentation
 
 import android.os.Bundle
+import android.widget.Toast
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.material.MaterialTheme
@@ -15,7 +16,9 @@ class MainActivity : ComponentActivity() {
             GoldMarketTheme {
                 // A surface container using the 'background' color from the theme
                 Surface(color = MaterialTheme.colors.background) {
-                   MainScreen()
+                    MainScreen {
+                        Toast.makeText(applicationContext, "${it.name}", Toast.LENGTH_SHORT).show()
+                    }
                 }
             }
         }

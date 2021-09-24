@@ -1,5 +1,6 @@
 package com.kurban.goldmarket.presentation.ui.screen
 
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
@@ -14,12 +15,13 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.kurban.goldmarket.di.Injection
+import com.kurban.goldmarket.domain.model.Model
 import com.kurban.goldmarket.presentation.MainViewModel
 import com.kurban.goldmarket.presentation.MainViewState
 
 
 @Composable
-fun MainScreen() {
+fun MainScreen(onClick: (Model) -> Unit) {
     val viewModel: MainViewModel = viewModel(factory = Injection.provideViewModelFactory())
     val state = viewModel.state.collectAsState()
 
@@ -41,7 +43,10 @@ fun MainScreen() {
                         .fillMaxWidth()
                         .padding(8.dp)
                 ) {
-                    Column(verticalArrangement = Arrangement.Center) {
+                    Column(
+                        verticalArrangement = Arrangement.Center,
+                        modifier = Modifier.clickable { onClick.invoke(model) })
+                    {
                         Text(text = "${model.name}")
                         Text(text = "Alış:${model.buy}")
                         Text(text = "Satış:${model.sell}")
