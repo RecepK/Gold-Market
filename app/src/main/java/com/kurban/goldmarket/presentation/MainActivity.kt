@@ -1,26 +1,43 @@
 package com.kurban.goldmarket.presentation
 
 import android.os.Bundle
-import android.widget.Toast
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Surface
+import androidx.compose.runtime.Composable
+import androidx.navigation.NavHostController
+import androidx.navigation.compose.NavHost
+import androidx.navigation.compose.composable
+import androidx.navigation.compose.rememberNavController
+import com.kurban.goldmarket.common.Screen
 import com.kurban.goldmarket.presentation.ui.screen.main.MainScreen
+import com.kurban.goldmarket.presentation.ui.screen.splash.SplashScreen
 import com.kurban.goldmarket.presentation.ui.theme.GoldMarketTheme
+
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
             GoldMarketTheme {
-                // A surface container using the 'background' color from the theme
                 Surface(color = MaterialTheme.colors.background) {
-                    MainScreen {
-                        Toast.makeText(applicationContext, "${it.name}", Toast.LENGTH_SHORT).show()
-                    }
+                    NavHost(rememberNavController())
                 }
             }
+        }
+    }
+}
+
+
+@Composable
+fun NavHost(navController: NavHostController) {
+    NavHost(navController = navController, startDestination = Screen.SplashScreen.name) {
+        composable(route = Screen.SplashScreen.name) {
+            SplashScreen()
+        }
+        composable(route = Screen.MainScreen.name) {
+            MainScreen {}
         }
     }
 }
