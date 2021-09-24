@@ -2,7 +2,7 @@ package com.kurban.goldmarket.di
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
-import com.kurban.goldmarket.presentation.MainViewModel
+import com.kurban.goldmarket.presentation.ui.screen.main.MainViewModel
 
 
 class ViewModelFactory : ViewModelProvider.Factory {

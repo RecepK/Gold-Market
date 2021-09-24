@@ -1,4 +1,4 @@
-package com.kurban.goldmarket.presentation.ui.screen
+package com.kurban.goldmarket.presentation.ui.screen.main
 
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
@@ -16,8 +16,8 @@ import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.kurban.goldmarket.di.Injection
 import com.kurban.goldmarket.domain.model.Model
-import com.kurban.goldmarket.presentation.MainViewModel
-import com.kurban.goldmarket.presentation.MainViewState
+import com.kurban.goldmarket.presentation.ui.screen.main.MainViewModel
+import com.kurban.goldmarket.presentation.ui.screen.main.MainViewState
 
 
 @Composable

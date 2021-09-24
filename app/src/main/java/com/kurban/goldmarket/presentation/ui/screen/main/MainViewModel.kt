@@ -1,4 +1,4 @@
-package com.kurban.goldmarket.presentation
+package com.kurban.goldmarket.presentation.ui.screen.main
 
 import androidx.lifecycle.ViewModel
 import com.kurban.goldmarket.domain.usecase.UseCase

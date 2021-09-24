@@ -1,4 +1,4 @@
-package com.kurban.goldmarket.presentation
+package com.kurban.goldmarket.presentation.ui.screen.main
 
 import com.kurban.goldmarket.domain.model.Model
 
