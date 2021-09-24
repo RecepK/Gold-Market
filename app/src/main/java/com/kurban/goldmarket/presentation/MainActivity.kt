@@ -11,6 +11,7 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.kurban.goldmarket.common.Screen
+import com.kurban.goldmarket.common.navigate
 import com.kurban.goldmarket.presentation.ui.screen.main.MainScreen
 import com.kurban.goldmarket.presentation.ui.screen.splash.SplashScreen
 import com.kurban.goldmarket.presentation.ui.theme.GoldMarketTheme
@@ -34,7 +35,9 @@ class MainActivity : ComponentActivity() {
 fun NavHost(navController: NavHostController) {
     NavHost(navController = navController, startDestination = Screen.SplashScreen.name) {
         composable(route = Screen.SplashScreen.name) {
-            SplashScreen()
+            SplashScreen {
+                navController.navigate(Screen.MainScreen)
+            }
         }
         composable(route = Screen.MainScreen.name) {
             MainScreen {}
