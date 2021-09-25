@@ -11,4 +11,5 @@ sealed class Resource<T>(val data: T? = null, val message: String? = null) {
 sealed class Screen(val name: String) {
     object SplashScreen : Screen("SplashScreen")
     object MainScreen : Screen("MainScreen")
+    object DetailScreen : Screen("DetailScreen")
 }
