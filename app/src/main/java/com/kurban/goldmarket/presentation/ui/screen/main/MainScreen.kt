@@ -1,5 +1,6 @@
 package com.kurban.goldmarket.presentation.ui.screen.main
 
+import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.rememberScrollState
@@ -12,12 +13,13 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.kurban.goldmarket.di.Injection
 import com.kurban.goldmarket.domain.model.Model
-import com.kurban.goldmarket.presentation.ui.screen.main.MainViewModel
-import com.kurban.goldmarket.presentation.ui.screen.main.MainViewState
 
 
 @Composable
@@ -26,12 +28,6 @@ fun MainScreen(onClick: (Model) -> Unit) {
     val state = viewModel.state.collectAsState()
 
     val stateValue = state.value
-
-    val value = when (stateValue) {
-        is MainViewState.Error -> "Error: ${stateValue.error}"
-        is MainViewState.Loading -> "Loading"
-        is MainViewState.Success -> "Success: ${stateValue.data?.size} "
-    }
 
     Scaffold {
         Column(modifier = Modifier.verticalScroll(state = rememberScrollState())) {
@@ -47,10 +43,10 @@ fun MainScreen(onClick: (Model) -> Unit) {
                         verticalArrangement = Arrangement.Center,
                         modifier = Modifier.clickable { onClick.invoke(model) })
                     {
-                        Text(text = "${model.name}")
-                        Text(text = "Alış:${model.buy}")
-                        Text(text = "Satış:${model.sell}")
-                        Text(text = "⏳ ${model.time}")
+                        ComposeTitleText(text = "${model.name}")
+                        ComposeText(text = "Alış:${model.buy}")
+                        ComposeText(text = "Satış:${model.sell}")
+                        ComposeText(text = "⏳ ${model.time}")
                         ComposeDivider()
                     }
                 }
@@ -66,5 +62,32 @@ fun ComposeDivider() {
         modifier = Modifier
             .fillMaxWidth()
             .width(1.dp)
+    )
+}
+
+@Composable
+fun ComposeTitleText(text: String) {
+    ComposeText(
+        text = text,
+        color = Color.White,
+        modifier = Modifier
+            .fillMaxWidth()
+            .background(Color.Blue)
+    )
+}
+
+@Composable
+fun ComposeText(
+    text: String,
+    color: Color = Color.Black,
+    modifier: Modifier = Modifier.padding(vertical = 4.dp)
+) {
+    Text(
+        text = text,
+        fontSize = 16.sp,
+        color = color,
+        fontWeight = FontWeight.Bold,
+        textAlign = TextAlign.Center,
+        modifier = modifier
     )
 }
