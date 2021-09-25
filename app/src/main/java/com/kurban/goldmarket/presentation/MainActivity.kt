@@ -7,10 +7,14 @@ import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Surface
 import androidx.compose.runtime.Composable
 import androidx.navigation.NavHostController
+import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
+import androidx.navigation.compose.navArgument
 import androidx.navigation.compose.rememberNavController
+import com.google.gson.Gson
 import com.kurban.goldmarket.common.Screen
+import com.kurban.goldmarket.domain.model.Model
 import com.kurban.goldmarket.presentation.ui.screen.detail.DetailScreen
 import com.kurban.goldmarket.presentation.ui.screen.main.MainScreen
 import com.kurban.goldmarket.presentation.ui.screen.splash.SplashScreen
@@ -42,11 +46,18 @@ fun NavHost(navController: NavHostController) {
         }
         composable(route = Screen.MainScreen.name) {
             MainScreen {
-                navController.navigate(route = Screen.DetailScreen.name)
+                val data = Gson().toJson(it)
+                val route = Screen.DetailScreen.name.plus("/${data}")
+                navController.navigate(route = route)
             }
         }
-        composable(route = Screen.DetailScreen.name) {
-            DetailScreen()
+        composable(
+            route = Screen.DetailScreen.name.plus("/{data}"),
+            arguments = listOf(navArgument("data") { type = NavType.StringType })
+        ) {
+            val data = it.arguments?.getString("data")
+            val model = Gson().fromJson(data, Model::class.java)
+            DetailScreen(model = model)
         }
     }
 }

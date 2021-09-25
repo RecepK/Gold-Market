@@ -7,14 +7,16 @@ import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import com.kurban.goldmarket.domain.model.Model
 
 
 @Composable
-fun DetailScreen() {
+fun DetailScreen(model: Model) {
 
     Box(contentAlignment = Alignment.Center, modifier = Modifier.fillMaxSize()) {
         Column(horizontalAlignment = Alignment.CenterHorizontally) {
             Text(text = "DetailScreen")
+            Text(text = "$model")
         }
     }
 }

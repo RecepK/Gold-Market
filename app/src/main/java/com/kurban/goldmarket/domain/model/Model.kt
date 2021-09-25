@@ -7,4 +7,8 @@ data class Model(
     val sell: String,
     val time: String,
     val serviceName: String
-)
+) {
+    override fun toString(): String {
+        return "name='$name' \nbuy='$buy' \nsell='$sell' \ntime='$time' \nserviceName='$serviceName'"
+    }
+}

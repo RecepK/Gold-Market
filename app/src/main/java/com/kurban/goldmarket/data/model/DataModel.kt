@@ -12,10 +12,10 @@ data class DataModel(
 
 fun DataModel.toModel(): Model {
     return Model(
-        name = name,
+        name = name.replace("/", "-"),
         buy = buy,
         sell = sell,
         time = time,
-        serviceName = ""
+        serviceName = "bigpara"
     )
 }
