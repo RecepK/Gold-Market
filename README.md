@@ -1,5 +1,8 @@
 # This is a sample MVVM application.
 
+## Architecture
+![Architecture](architecture.jpg)
+
 ## Features
 - Kotlin
 - Jetpack Compose
@@ -15,3 +18,8 @@
 - viewmodel
 - jsoup
 - gson
+
+
+## Todo
+- Local DataSource
+- Unit Test
