@@ -3,13 +3,12 @@ package com.kurban.goldmarket.presentation.ui.screen.main
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
-import androidx.compose.foundation.rememberScrollState
-import androidx.compose.foundation.verticalScroll
+import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.items
 import androidx.compose.material.Divider
 import androidx.compose.material.Scaffold
 import androidx.compose.material.Text
-import androidx.compose.runtime.Composable
-import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -25,31 +24,35 @@ import com.kurban.goldmarket.domain.model.Model
 @Composable
 fun MainScreen(onClick: (Model) -> Unit) {
     val viewModel: MainViewModel = viewModel(factory = Injection.provideViewModelFactory())
-    val state = viewModel.state.collectAsState()
+    val state = viewModel.state.collectAsState().value
+    var visibleState: MainViewState by remember { mutableStateOf(state) }
+    visibleState = state
 
-    val stateValue = state.value
+    Column(
+        modifier = Modifier
+            .padding(16.dp)
+            .fillMaxWidth()
+    ) {
+        when (visibleState) {
+            is MainViewState.Error -> {
+                ComposeText(text = "Error")
+            }
+            is MainViewState.Loading -> {
+                ComposeText(text = "Loading")
+            }
+            is MainViewState.Success -> {
+                SampleComposable(state.data!!, onClick)
+            }
+        }
+    }
+}
 
+@Composable
+fun SampleComposable(list: List<Model>, onClick: (Model) -> Unit) {
     Scaffold {
-        Column(modifier = Modifier.verticalScroll(state = rememberScrollState())) {
-            stateValue.data?.forEach { model ->
-                Row(
-                    horizontalArrangement = Arrangement.SpaceBetween,
-                    verticalAlignment = Alignment.CenterVertically,
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .padding(8.dp)
-                ) {
-                    Column(
-                        verticalArrangement = Arrangement.Center,
-                        modifier = Modifier.clickable { onClick.invoke(model) })
-                    {
-                        ComposeTitleText(text = "${model.name}")
-                        ComposeText(text = "Alış:${model.buy}")
-                        ComposeText(text = "Satış:${model.sell}")
-                        ComposeText(text = "⏳ ${model.time}")
-                        ComposeDivider()
-                    }
-                }
+        LazyColumn {
+            items(list) { model ->
+                ComposeRow(model = model, onClick = onClick)
             }
         }
     }
@@ -90,4 +93,27 @@ fun ComposeText(
         textAlign = TextAlign.Center,
         modifier = modifier
     )
+}
+
+@Composable
+fun ComposeRow(model: Model, onClick: (Model) -> Unit) {
+    Row(
+        horizontalArrangement = Arrangement.SpaceBetween,
+        verticalAlignment = Alignment.CenterVertically,
+        modifier = Modifier
+            .fillMaxWidth()
+            .padding(8.dp)
+    ) {
+        Column(
+            verticalArrangement = Arrangement.Center,
+            modifier = Modifier.clickable { onClick.invoke(model) }
+        )
+        {
+            ComposeTitleText(text = "${model.name}")
+            ComposeText(text = "Alış:${model.buy}")
+            ComposeText(text = "Satış:${model.sell}")
+            ComposeText(text = "⏳ ${model.time}")
+            ComposeDivider()
+        }
+    }
 }
