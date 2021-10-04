@@ -8,8 +8,10 @@ data class DataModel(
     val buy: String,
     val sell: String,
     val time: String,
+    val serviceName: String
 )
 
+/*
 fun DataModel.toModel(): Model {
     return Model(
         name = name.replace("/", "-"),
@@ -17,5 +19,16 @@ fun DataModel.toModel(): Model {
         sell = sell,
         time = time,
         serviceName = "bigpara"
+    )
+}
+ */
+
+fun DataModel.toModel(): Model {
+    return Model(
+        name = name,
+        buy = buy,
+        sell = sell,
+        time = time,
+        serviceName = serviceName
     )
 }
